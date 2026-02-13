@@ -1,5 +1,12 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import pb from '@/lib/pocketbaseClient';
+import { auth } from '@/lib/firebase'; // تأكد أن هذا الملف موجود وبه إعدادات Firebase التي نسختها
+import { 
+  createUserWithEmailAndPassword, 
+  signInWithEmailAndPassword, 
+  signOut, 
+  onAuthStateChanged,
+  updateProfile 
+} from 'firebase/auth';
 
 const AuthContext = createContext();
 
@@ -12,17 +19,14 @@ export const useAuth = () => {
 };
 
 export const AuthProvider = ({ children }) => {
-  const [currentUser, setCurrentUser] = useState(pb.authStore.model);
+  const [currentUser, setCurrentUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Check auth state on mount
-    setCurrentUser(pb.authStore.model);
-    setLoading(false);
-
-    // Listen for auth changes
-    const unsubscribe = pb.authStore.onChange((token, model) => {
-      setCurrentUser(model);
+    // مراقبة حالة المستخدم (تسجيل دخول أو خروج)
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setCurrentUser(user);
+      setLoading(false);
     });
 
     return () => {
@@ -30,41 +34,42 @@ export const AuthProvider = ({ children }) => {
     };
   }, []);
 
+  // دالة تسجيل الدخول
   const login = async (email, password) => {
     try {
-      const authData = await pb.collection('users').authWithPassword(email, password);
-      return authData;
+      const result = await signInWithEmailAndPassword(auth, email, password);
+      return result.user;
     } catch (error) {
       console.error('Login error:', error);
       throw error;
     }
   };
 
+  // دالة إنشاء حساب جديد (التي كانت تسبب لك المشكلة)
   const signup = async (email, password, fullName) => {
     try {
-      // 1. Create user
-      const data = {
-        email,
-        password,
-        passwordConfirm: password,
-        name: fullName,
-        fullName: fullName // Also saving to fullName field as per schema
-      };
-      const record = await pb.collection('users').create(data);
+      // 1. إنشاء المستخدم في فايربيز
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       
-      // 2. Auto login after signup
-      await login(email, password);
+      // 2. إضافة اسم المستخدم للملف الشخصي
+      await updateProfile(userCredential.user, {
+        displayName: fullName
+      });
       
-      return record;
+      return userCredential.user;
     } catch (error) {
       console.error('Signup error:', error);
       throw error;
     }
   };
 
-  const logout = () => {
-    pb.authStore.clear();
-    setCurrentUser(null);
+  // دالة تسجيل الخروج
+  const logout = async () => {
+    try {
+      await signOut(auth);
+    } catch (error) {
+      console.error('Logout error:', error);
+    }
   };
 
   const value = {
