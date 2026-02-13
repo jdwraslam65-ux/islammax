@@ -11,6 +11,7 @@ import LoginPage from '@/pages/LoginPage.jsx';
 import SignupPage from '@/pages/SignupPage.jsx';
 import DashboardPage from '@/pages/DashboardPage.jsx';
 import { Toaster } from '@/components/ui/toaster';
+import SequencesPage from '@/pages/SequencesPage'; // تأكد من وجود @ لتطابق بقية الملفات
 
 function App() {
   return (
@@ -36,6 +37,16 @@ function App() {
                     </ProtectedRoute>
                   } 
                 />
+                
+                {/* صفحة المتتاليات الجديدة - أضفناها هنا */}
+                <Route 
+                  path="/sequences" 
+                  element={
+                    <ProtectedRoute>
+                      <SequencesPage />
+                    </ProtectedRoute>
+                  } 
+                />
               </Routes>
             </main>
             <Footer />
@@ -46,4 +57,5 @@ function App() {
     </ThemeProvider>
   );
 }
+
 export default App;

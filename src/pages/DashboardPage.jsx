@@ -5,14 +5,15 @@ import { Progress } from '@/components/ui/progress';
 import { Button } from '@/components/ui/button';
 import { PlayCircle, BookOpen, Award, Clock } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom'; // 1. أضفنا هذا السطر للتنقل
 import pb from '@/lib/pocketbaseClient';
 
 const DashboardPage = () => {
   const { currentUser } = useAuth();
+  const navigate = useNavigate(); // 2. تفعيل دالة التنقل
   const [units, setUnits] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Mock data for units since we might not have them in DB yet
   const defaultUnits = [
     { id: '1', title: 'الدوال العددية', progress: 65, lessons: 12, completed: 8 },
     { id: '2', title: 'المتتاليات', progress: 30, lessons: 8, completed: 2 },
@@ -23,7 +24,6 @@ const DashboardPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Try to fetch real units if they exist
         const records = await pb.collection('mathUnits').getFullList({
           sort: 'order',
           $autoCancel: false
@@ -33,8 +33,8 @@ const DashboardPage = () => {
           setUnits(records.map(r => ({
             id: r.id,
             title: r.unitName,
-            progress: 0, // Placeholder for real progress logic
-            lessons: 10, // Placeholder
+            progress: 0,
+            lessons: 10,
             completed: 0
           })));
         } else {
@@ -51,8 +51,18 @@ const DashboardPage = () => {
     fetchData();
   }, []);
 
+  // 3. دالة للتعامل مع الضغط على الزر
+  const handleStartStudy = (unitTitle) => {
+    if (unitTitle === 'المتتاليات') {
+      navigate('/sequences'); // يوجه لصفحتك الجديدة
+    } else {
+      console.log(`بدء دراسة: ${unitTitle}`);
+      // هنا يمكنك إضافة توجيه لدروس أخرى مستقبلاً
+    }
+  };
+
   return (
-    <div className="container mx-auto px-4 py-8 space-y-8">
+    <div className="container mx-auto px-4 py-8 space-y-8 text-right" dir="rtl">
       {/* Welcome Section */}
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
@@ -61,7 +71,7 @@ const DashboardPage = () => {
       >
         <div>
           <h1 className="text-3xl font-bold text-white mb-2">
-            مرحباً، {currentUser?.name || 'طالب'} 👋
+            مرحباً، {currentUser?.displayName || 'طالبنا العزيز'} 👋
           </h1>
           <p className="text-gray-300">
             واصل تقدمك في التحضير للبكالوريا. أنت تسير في الطريق الصحيح!
@@ -89,7 +99,7 @@ const DashboardPage = () => {
         </div>
       </motion.div>
 
-      {/* Progress Overview */}
+      {/* Units Section */}
       <section>
         <h2 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
           <BookOpen className="w-5 h-5 text-blue-400" />
@@ -125,7 +135,10 @@ const DashboardPage = () => {
                   </div>
                 </CardContent>
                 <div className="px-6 pb-6">
-                  <Button className="w-full bg-white/10 hover:bg-white/20 text-white border border-white/10">
+                  <Button 
+                    onClick={() => handleStartStudy(unit.title)} // 4. ربط الدالة بالزر
+                    className="w-full bg-blue-600 hover:bg-blue-700 text-white border-0 shadow-lg shadow-blue-500/20"
+                  >
                     <PlayCircle className="w-4 h-4 ml-2" />
                     متابعة الدراسة
                   </Button>
