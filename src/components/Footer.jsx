@@ -29,8 +29,8 @@ const Footer = () => {
           {/* Signature Section */}
           <div className="flex flex-col items-center gap-2 order-first sm:order-none mb-4 sm:mb-0">
              <div className="flex items-center gap-2 text-lg font-medium text-gray-700 dark:text-gray-200">
-                <span>صنع من طرف</span>
-                <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400">اسلام</span>
+                <span>اسلام</span>
+                <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400">صنع من طرف</span>
                 <Heart className="w-4 h-4 text-red-500 fill-red-500 animate-pulse" />
              </div>
              <div className="h-1 w-12 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 opacity-50"></div>
