@@ -6,29 +6,18 @@
         <meta name="generator" content="Islam Mx" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Bac MX - منصة إسلام ماكس</title>
-        <meta name="google-site-verification" content="SnwIqZT5ZshgtU04OpdpRL21KBJP3L_H7664Y7sE0TU" />
+        <meta name="google-site-verification" content="SnwIqZT5ZShgtU04OpdpRL21KBJP3L_H7664Y7sE0TU" />
         <meta name="description" content="منصة إسلام ماكس التعليمية لدروس الرياضيات والتحضير للبكالوريا. ملخصات وفيديوهات Full HD.">
-        <meta name="keywords" content="إسلام ماكس, رياضيات, بكالوريا الجزائر, متتاليات">
     </head>
     <body>
         <div id="root"></div>
 
-        <div class="glass-section">
-            <h2 style="text-align: center; color: white; margin-bottom: 20px;">📉 حساب معدل البكالوريا 2026</h2>
-            <div class="glass-grid">
-                <div class="glass-card" onclick="openCalculator('science')">🧪 علوم تجريبية</div>
-                <div class="glass-card" onclick="openCalculator('math')">📐 رياضيات</div>
-                <div class="glass-card" onclick="openCalculator('tech')">⚙️ تقني رياضي</div>
-            </div>
-        </div>
-
-        <div id="countdown-icon" onclick="toggleCountdown()" title="العد التنازلي للباك">⏳</div>
-
+        <div id="countdown-icon" onclick="toggleCountdown()" title="العد التنازلي">⏳</div>
         <div id="countdown-overlay" class="hidden-overlay" onclick="closeOverlay(event)">
             <div class="overlay-content">
                 <button class="close-btn" onclick="toggleCountdown()">×</button>
                 <div class="countdown-container">
-                    <h2 style="margin-bottom: 15px; color: white;">⏳ باقي على البكالوريا</h2>
+                    <h2 style="color: white;">⏳ باقي على البكالوريا</h2>
                     <div class="countdown-grid">
                         <div class="time-box"><span id="days">00</span><p>يوم</p></div>
                         <div class="time-box"><span id="hours">00</span><p>ساعة</p></div>
@@ -39,76 +28,27 @@
             </div>
         </div>
 
-        <div id="calc-modal" class="hidden-overlay" onclick="closeCalcOnBack(event)">
-            <div class="overlay-content">
-                <div class="glass-card calculator-box">
-                    <button class="close-btn" onclick="closeCalc()">×</button>
-                    <h2 id="branch-title" style="margin-bottom: 10px;">حساب المعدل</h2>
-                    <div id="subjects-container" style="max-height: 350px; overflow-y: auto; margin: 15px 0;">
-                        </div>
-                    <button class="calc-btn" onclick="calculateFinalScore()">إحسب المعدل</button>
-                    <h2 id="final-result" style="margin-top: 15px; color: #2ecc71;">المعدل: --</h2>
-                </div>
-            </div>
-        </div>
-
         <script type="module" src="/src/main.jsx"></script> 
 
         <script>
-            // --- أولاً: منطق العداد التنازلي ---
             function toggleCountdown() {
                 const overlay = document.getElementById('countdown-overlay');
                 overlay.classList.toggle('active');
             }
-
             function closeOverlay(e) {
                 if (e.target.id === 'countdown-overlay') toggleCountdown();
             }
-
             const target = new Date("June 14, 2026 08:00:00").getTime();
             setInterval(() => {
                 const now = new Date().getTime();
                 const diff = target - now;
-                document.getElementById("days").innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
-                document.getElementById("hours").innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                document.getElementById("minutes").innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-                document.getElementById("seconds").innerText = Math.floor((diff % (1000 * 60)) / 1000);
-            }, 1000);
-
-            // --- ثانياً: منطق حاسبة المعدل والمعاملات الجزائرية ---
-            const coeffs = {
-                science: { "رياضيات": 7, "علوم": 6, "فيزياء": 5, "عربية": 3, "فلسفة": 2, "إسلامية": 2, "تاريخ": 2, "فرنسية": 2, "إنجليزية": 2, "رياضة": 1 },
-                math: { "رياضيات": 7, "فيزياء": 6, "علوم": 2, "عربية": 3, "فلسفة": 2, "إسلامية": 2, "تاريخ": 2, "فرنسية": 2, "إنجليزية": 2, "رياضة": 1 },
-                tech: { "تكنولوجيا": 7, "رياضيات": 6, "فيزياء": 6, "عربية": 3, "فلسفة": 2, "إسلامية": 2, "تاريخ": 2, "فرنسية": 2, "إنجليزية": 2, "رياضة": 1 }
-            };
-
-            function openCalculator(branch) {
-                const container = document.getElementById('subjects-container');
-                container.innerHTML = "";
-                document.getElementById('branch-title').innerText = "شعبة " + (branch==='science'?'العلوم':branch==='math'?'الرياضيات':'التقني');
-                for (let s in coeffs[branch]) {
-                    container.innerHTML += `
-                        <div style="display:flex; justify-content:space-between; background:rgba(255,255,255,0.05); padding:10px; border-radius:10px; margin-bottom:5px;">
-                            <span style="color:white">${s} (×${coeffs[branch][s]})</span>
-                            <input type="number" class="score-input" data-c="${coeffs[branch][s]}" placeholder="00" style="width:60px; text-align:center; border-radius:5px; border:none;">
-                        </div>`;
+                if(document.getElementById("days")){
+                    document.getElementById("days").innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+                    document.getElementById("hours").innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    document.getElementById("minutes").innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                    document.getElementById("seconds").innerText = Math.floor((diff % (1000 * 60)) / 1000);
                 }
-                document.getElementById('calc-modal').classList.add('active');
-            }
-
-            function calculateFinalScore() {
-                let p = 0, c = 0;
-                document.querySelectorAll('.score-input').forEach(i => {
-                    let val = parseFloat(i.value) || 0;
-                    let coeff = parseInt(i.dataset.c);
-                    p += val * coeff;
-                    c += coeff;
-                });
-                document.getElementById('final-result').innerText = "المعدل: " + (p/c).toFixed(2);
-            }
-
-            function closeCalc() { document.getElementById('calc-modal').classList.remove('active'); }
-            function closeCalcOnBack(e) { if (e.target.id === 'calc-modal') closeCalc(); }
+            }, 1000);
         </script>
     </body>
 </html>
