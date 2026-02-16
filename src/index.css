@@ -82,43 +82,72 @@
 .glass-card {
   @apply bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl;
 }/* تنسيق العداد الزجاجي */
+/* الأيقونة العائمة */
+#countdown-icon {
+    position: fixed;
+    bottom: 25px;
+    left: 25px; /* غيرتها لليسار لكي لا تغطي أزرار أخرى */
+    width: 55px;
+    height: 55px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 25px;
+    cursor: pointer;
+    z-index: 999;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    transition: 0.3s;
+}
+
+#countdown-icon:hover { transform: scale(1.1) rotate(10deg); }
+
+/* الحاوية المنبثقة الخلفية */
+#countdown-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
+    z-index: 1000;
+}
+
+#countdown-overlay.active { display: block; }
+
+.overlay-content {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 450px;
+}
+
+/* زر الإغلاق */
+.close-btn {
+    position: absolute;
+    top: -45px; right: 0;
+    background: none; border: none;
+    color: white; font-size: 35px; cursor: pointer;
+}
+
+/* تنسيق الصندوق الزجاجي (نفس الذي أعجبك) */
 .countdown-container {
     background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 24px;
     padding: 2rem;
     text-align: center;
     color: white;
-    max-width: 500px;
-    margin: 2rem auto;
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
 }
 
-.countdown-grid {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin-top: 1.5rem;
-}
-
-.time-box {
-    background: rgba(255, 255, 255, 0.15);
-    padding: 1rem;
-    border-radius: 12px;
-    min-width: 70px;
-}
-
-.time-box span {
-    font-size: 2rem;
-    font-weight: 800;
-    display: block;
-    color: #fff;
-}
-
-.time-box p {
-    font-size: 0.75rem;
-    margin: 0;
-    opacity: 0.8;
-}
+.countdown-grid { display: flex; justify-content: center; gap: 10px; }
+.time-box { background: rgba(255, 255, 255, 0.1); padding: 10px; border-radius: 12px; min-width: 65px; }
+.time-box span { font-size: 1.8rem; font-weight: bold; display: block; }
+.time-box p { font-size: 0.7rem; margin: 0; opacity: 0.8; }

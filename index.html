@@ -13,52 +13,47 @@
 	<body>
 		<div id="root"></div>
 		<script type="module" src="/src/main.jsx"></script> 
-		<div class="countdown-container">
-    <h2>⏳ العد التنازلي لبكالوريا 2026</h2>
-    <div id="countdown">
-        <div class="time-box">
-            <span id="days">00</span>
-            <p>يوم</p>
-        </div>
-        <div class="time-box">
-            <span id="hours">00</span>
-            <p>ساعة</p>
-        </div>
-        <div class="time-box">
-            <span id="minutes">00</span>
-            <p>دقيقة</p>
-        </div>
-        <div class="time-box">
-            <span id="seconds">00</span>
-            <p>ثانية</p>
+		<div id="countdown-icon" onclick="toggleCountdown()" title="العد التنازلي للباك">
+    ⏳
+</div>
+
+<div id="countdown-overlay" onclick="closeOverlay(event)">
+    <div class="overlay-content">
+        <button class="close-btn" onclick="toggleCountdown()">×</button>
+        <div class="countdown-container">
+            <h2 style="margin-bottom: 15px;">⏳ العد التنازلي لبكالوريا 2026</h2>
+            <div class="countdown-grid">
+                <div class="time-box"><span id="days">00</span><p>يوم</p></div>
+                <div class="time-box"><span id="hours">00</span><p>ساعة</p></div>
+                <div class="time-box"><span id="minutes">00</span><p>دقيقة</p></div>
+                <div class="time-box"><span id="seconds">00</span><p>ثانية</p></div>
+            </div>
         </div>
     </div>
 </div>
+
 <script>
-    const targetDate = new Date("June 14, 2026 08:00:00").getTime();
-
-    function updateCountdown() {
-        const now = new Date().getTime();
-        const difference = targetDate - now;
-
-        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-
-        document.getElementById("days").innerText = days;
-        document.getElementById("hours").innerText = hours;
-        document.getElementById("minutes").innerText = minutes;
-        document.getElementById("seconds").innerText = seconds;
-
-        if (difference < 0) {
-            clearInterval(interval);
-            document.querySelector(".countdown-container").innerHTML = "<h2>بالتوفيق في البكالوريا! 🎓</h2>";
-        }
+    // دالة فتح وإغلاق العداد
+    function toggleCountdown() {
+        const overlay = document.getElementById('countdown-overlay');
+        overlay.classList.toggle('active');
     }
 
-    const interval = setInterval(updateCountdown, 1000);
-    updateCountdown();
+    // إغلاق عند الضغط خارج الصندوق الزجاجي
+    function closeOverlay(e) {
+        if (e.target.id === 'countdown-overlay') toggleCountdown();
+    }
+
+    // تحديث الوقت (نفس الكود السابق)
+    const target = new Date("June 14, 2026 08:00:00").getTime();
+    setInterval(() => {
+        const now = new Date().getTime();
+        const diff = target - now;
+        document.getElementById("days").innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+        document.getElementById("hours").innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        document.getElementById("minutes").innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        document.getElementById("seconds").innerText = Math.floor((diff % (1000 * 60)) / 1000);
+    }, 1000);
 </script>
 	</body>
 </html>
