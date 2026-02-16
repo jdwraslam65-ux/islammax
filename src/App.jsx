@@ -11,7 +11,8 @@ import LoginPage from '@/pages/LoginPage.jsx';
 import SignupPage from '@/pages/SignupPage.jsx';
 import DashboardPage from '@/pages/DashboardPage.jsx';
 import { Toaster } from '@/components/ui/toaster';
-import SequencesPage from '@/pages/SequencesPage'; // تأكد من وجود @ لتطابق بقية الملفات
+import SequencesPage from '@/pages/SequencesPage'; 
+import CalculatorPage from '@/pages/CalculatorPage'; // 👈 أضفنا استيراد الصفحة الجديدة
 
 function App() {
   return (
@@ -28,6 +29,9 @@ function App() {
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/signup" element={<SignupPage />} />
 
+                {/* صفحة حساب المعدل - عامة للجميع */}
+                <Route path="/calculator" element={<CalculatorPage />} /> 
+
                 {/* Protected Routes */}
                 <Route 
                   path="/dashboard" 
@@ -38,7 +42,6 @@ function App() {
                   } 
                 />
                 
-                {/* صفحة المتتاليات الجديدة - أضفناها هنا */}
                 <Route 
                   path="/sequences" 
                   element={

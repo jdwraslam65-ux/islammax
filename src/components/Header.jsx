@@ -11,7 +11,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Moon, Sun, User, LogOut, LayoutDashboard, Home } from 'lucide-react';
+// أضفنا أيقونة Calculator هنا
+import { Moon, Sun, User, LogOut, LayoutDashboard, Home, Calculator } from 'lucide-react';
 
 const Header = () => {
   const { currentUser, logout } = useAuth();
@@ -42,6 +43,13 @@ const Header = () => {
             <Home className="w-4 h-4" />
             الرئيسية
           </Link>
+          
+          {/* زر حساب المعدل - متاح للجميع (أو يمكنك وضعه خلف شرط الدخول) */}
+          <Link to="/calculator" className="text-sm font-medium text-gray-200 hover:text-white transition-colors flex items-center gap-1">
+            <Calculator className="w-4 h-4" />
+            حساب المعدل
+          </Link>
+
           {currentUser && (
             <Link to="/dashboard" className="text-sm font-medium text-gray-200 hover:text-white transition-colors flex items-center gap-1">
               <LayoutDashboard className="w-4 h-4" />
@@ -77,6 +85,13 @@ const Header = () => {
                   <LayoutDashboard className="mr-2 h-4 w-4" />
                   <span>لوحة التحكم</span>
                 </DropdownMenuItem>
+                
+                {/* إضافة خيار في القائمة المنسدلة للهواتف */}
+                <DropdownMenuItem onClick={() => navigate('/calculator')}>
+                  <Calculator className="mr-2 h-4 w-4" />
+                  <span>حساب المعدل</span>
+                </DropdownMenuItem>
+
                 <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={handleLogout} className="text-red-400 focus:text-red-400">
                   <LogOut className="mr-2 h-4 w-4" />
