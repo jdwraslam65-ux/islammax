@@ -151,3 +151,80 @@
 .time-box { background: rgba(255, 255, 255, 0.1); padding: 10px; border-radius: 12px; min-width: 65px; }
 .time-box span { font-size: 1.8rem; font-weight: bold; display: block; }
 .time-box p { font-size: 0.7rem; margin: 0; opacity: 0.8; }
+/* --- تنسيقات الموقع الزجاجية --- */
+:root {
+  --glass-bg: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --blur: blur(15px);
+}
+
+/* الخلفية المنقطة للقسم */
+.glass-section {
+    background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+    padding: 40px 10px;
+    border-radius: 30px;
+    margin: 20px auto;
+    max-width: 1000px;
+}
+
+/* البطاقات الزجاجية للشعب */
+.glass-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: var(--blur);
+    -webkit-backdrop-filter: var(--blur);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 25px;
+    text-align: center;
+    color: white;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.glass-card:hover { transform: translateY(-5px); background: rgba(255, 255, 255, 0.15); }
+
+/* الأيقونة العائمة للعداد */
+#countdown-icon {
+    position: fixed; bottom: 25px; left: 25px;
+    width: 60px; height: 60px;
+    background: var(--glass-bg); backdrop-filter: var(--blur);
+    border: 1px solid var(--glass-border); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 25px; cursor: pointer; z-index: 999;
+}
+
+/* النافذة المنبثقة (المودال) */
+.hidden-overlay {
+    display: none; position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(5px);
+    z-index: 1000;
+}
+
+.overlay-content {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%); width: 90%; max-width: 450px;
+}
+
+/* خانات إدخال النقاط */
+.subject-row {
+    display: flex; justify-content: space-between; margin-bottom: 10px;
+    background: rgba(255,255,255,0.05); padding: 8px; border-radius: 10px;
+}
+
+.score-input {
+    width: 60px; background: rgba(255,255,255,0.1); border: 1px solid var(--glass-border);
+    border-radius: 5px; color: white; text-align: center;
+}
+
+.calc-btn {
+    background: #3498db; color: white; border: none; padding: 10px;
+    width: 100%; border-radius: 10px; cursor: pointer; font-weight: bold;
+}
