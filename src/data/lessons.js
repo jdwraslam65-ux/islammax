@@ -2,15 +2,15 @@ export const units = [
   {
     id: "sequences",
     title: "المتتاليات العددية",
-    videoUrl: "https://www.youtube.com/embed/رابط_فيديو_المتتاليات",
-    description: "شرح كامل لدرس المتتاليات لطلبة البكالوريا.",
+    videoUrl: "https://www.youtube.com/embed/Z_u5WJmO5p4", // فيديو المتتاليات
+    description: "شرح شامل لدرس المتتاليات لطلبة البكالوريا.",
     pdfLink: "/files/sequences.pdf"
   },
   {
-    id: "complex-numbers",
+    id: "complex-numbers", 
     title: "الأعداد المركبة",
-    videoUrl: "https://www.youtube.com/embed/رابط_فيديو_الأعداد",
-    description: "تبسيط الأعداد المركبة والشكل الأسي والمثلثي.",
+    videoUrl: "https://www.youtube.com/embed/Z_u5WJmO5p4", // فيديو الأعداد المركبة (غير الرابط لاحقاً)
+    description: "شرح الأعداد المركبة من الصفر.",
     pdfLink: "/files/complex.pdf"
   }
 ];
