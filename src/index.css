@@ -229,48 +229,91 @@
     width: 100%; border-radius: 10px; cursor: pointer; font-weight: bold;
 }
 /* --- Crystal Navbar Styles --- */
+/* الألوان الأساسية للخلفية */
+:root {
+  --bg0: #060914;
+  --bg1: #0b1428;
+  --bg2: #11182e;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(1200px 600px at 50% 100%, rgba(18, 33, 64, 0.55) 0%, transparent 75%),
+    linear-gradient(160deg, var(--bg0) 0%, var(--bg1) 50%, var(--bg2) 100%);
+  color: #f6f8ff;
+  overflow-x: hidden;
+}
+
+/* تأثير هيكل الزجاج الكريستالي */
 .glass-shell {
-  background: rgba(255, 255, 255, 0.03) !important;
-  backdrop-filter: blur(25px) saturate(180%) !important;
-  -webkit-backdrop-filter: blur(25px) saturate(180%) !important;
-  border: 1px solid rgba(255, 255, 255, 0.12) !important;
-  box-shadow: 
-    0 15px 35px rgba(0, 0, 0, 0.2),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.05) !important;
+  position: relative;
+  background: linear-gradient(180deg, rgba(3, 7, 18, 0.3), rgba(3, 7, 18, 0.2));
+  backdrop-filter: blur(40px) saturate(200%) brightness(1.1);
+  -webkit-backdrop-filter: blur(40px) saturate(200%) brightness(1.1);
+  border-radius: 20px;
 }
 
-/* الإضاءة المتحركة خلف الهيدر */
-.nav-orb-container {
+/* لمعة الكريستال العلوية */
+.glass-shell::before {
+  content: "";
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  overflow: hidden;
+  inset: 1px;
+  border-radius: inherit;
+  background:
+    radial-gradient(circle at 86% 14%, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.32) 18%, rgba(255, 255, 255, 0.08) 34%, rgba(255, 255, 255, 0) 48%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.03));
   pointer-events: none;
-  z-index: -1;
-  border-radius: 24px;
 }
 
-.nav-orb {
+/* انكسار الضوء الملون على الزوايا */
+.glass-shell::after {
+  content: "";
   position: absolute;
-  width: 200px;
-  height: 80px;
-  background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899);
-  filter: blur(50px);
-  opacity: 0.25;
-  border-radius: 50%;
-  animation: moveOrb 10s infinite alternate ease-in-out;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 0% 0%, rgba(96, 206, 255, 0.42) 0%, rgba(96, 206, 255, 0) 15%),
+    radial-gradient(circle at 100% 0%, rgba(244, 114, 182, 0.4) 0%, rgba(244, 114, 182, 0) 15%),
+    radial-gradient(circle at 0% 100%, rgba(59, 130, 246, 0.36) 0%, rgba(59, 130, 246, 0) 15%),
+    radial-gradient(circle at 100% 100%, rgba(250, 204, 21, 0.42) 0%, rgba(250, 204, 21, 0) 15%);
+  opacity: 0.95;
 }
 
-@keyframes moveOrb {
-  0% { left: -10%; transform: translateX(0) scale(1); }
-  100% { left: 90%; transform: translateX(-50%) scale(1.2); }
+/* إطار البريسم (المنشور) */
+.prism-border {
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.42),
+    inset 0 2px 0 rgba(255, 255, 255, 0.5),
+    inset 0 -2px 0 rgba(255, 255, 255, 0.36),
+    inset 0 0 0 1px rgba(186, 230, 253, 0.28),
+    0 18px 40px rgba(2, 8, 23, 0.54),
+    0 0 22px rgba(56, 189, 248, 0.18);
 }
 
-/* تأثير النيون عند تمرير الماوس على الروابط */
-.nav-link-glow:hover {
-  color: white !important;
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
-  transform: translateY(-1px);
+/* أزرار الكريستال */
+.crystal-btn {
+  position: relative;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.28), rgba(0, 0, 0, 0.18));
+  box-shadow:
+    inset 0 2px 1px rgba(255, 255, 255, 0.24),
+    inset 0 -2px 1px rgba(255, 255, 255, 0.17),
+    0 6px 20px rgba(2, 8, 23, 0.42);
+  transition: all 0.2s ease;
+}
+
+.crystal-btn:hover {
+  transform: translateY(-1px) scale(1.02);
+}
+
+/* الإضاءة السائلة خلف الشريط */
+.liquid-shadow-blue {
+  position: absolute; width: 220px; height: 96px; left: calc(50% - 420px); top: 38px;
+  background: rgba(56, 189, 248, 0.35); filter: blur(42px); pointer-events: none;
+}
+.liquid-shadow-orange {
+  position: absolute; width: 220px; height: 96px; right: calc(50% - 420px); top: 42px;
+  background: rgba(255, 149, 56, 0.36); filter: blur(42px); pointer-events: none;
 }
