@@ -3,6 +3,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Sun, Moon, LogOut, LayoutDashboard, Home, Calculator, Menu, X } from 'lucide-react';
+import { useTheme } from '@/contexts/ThemeContext';
  
 const Header = () => {
   const { currentUser, logout } = useAuth();
@@ -10,7 +11,7 @@ const Header = () => {
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
   const [dropOpen, setDropOpen] = useState(false);
-  const [dark, setDark] = useState(true);
+  const { isDarkMode, toggleTheme } = useTheme();
  
   useEffect(() => { setMenuOpen(false); setDropOpen(false); }, [location]);
  
@@ -149,7 +150,7 @@ const Header = () => {
               <motion.button
                 whileHover={{ scale: 1.12 }}
                 whileTap={{ scale: 0.9 }}
-                onClick={() => setDark(!dark)}
+                onClick={toggleTheme}
                 style={{
                   width: 32, height: 32,
                   borderRadius: '50%',
@@ -160,7 +161,7 @@ const Header = () => {
                   cursor: 'pointer',
                 }}
               >
-                {dark
+                {isDarkMode
                   ? <Sun style={{ width:14, height:14, color:'rgba(255,255,255,0.7)' }} />
                   : <Moon style={{ width:14, height:14, color:'rgba(255,255,255,0.7)' }} />}
               </motion.button>
@@ -332,3 +333,4 @@ const Header = () => {
 };
  
 export default Header;
+ 
