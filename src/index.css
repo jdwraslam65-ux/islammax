@@ -228,3 +228,49 @@
     background: #3498db; color: white; border: none; padding: 10px;
     width: 100%; border-radius: 10px; cursor: pointer; font-weight: bold;
 }
+/* --- Crystal Navbar Styles --- */
+.glass-shell {
+  background: rgba(255, 255, 255, 0.03) !important;
+  backdrop-filter: blur(25px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(25px) saturate(180%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 
+    0 15px 35px rgba(0, 0, 0, 0.2),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.05) !important;
+}
+
+/* الإضاءة المتحركة خلف الهيدر */
+.nav-orb-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: -1;
+  border-radius: 24px;
+}
+
+.nav-orb {
+  position: absolute;
+  width: 200px;
+  height: 80px;
+  background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899);
+  filter: blur(50px);
+  opacity: 0.25;
+  border-radius: 50%;
+  animation: moveOrb 10s infinite alternate ease-in-out;
+}
+
+@keyframes moveOrb {
+  0% { left: -10%; transform: translateX(0) scale(1); }
+  100% { left: 90%; transform: translateX(-50%) scale(1.2); }
+}
+
+/* تأثير النيون عند تمرير الماوس على الروابط */
+.nav-link-glow:hover {
+  color: white !important;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+  transform: translateY(-1px);
+}
