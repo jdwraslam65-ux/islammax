@@ -6,11 +6,11 @@ export const units = [
     description: "شرح شامل لدرس المتتاليات لطلبة البكالوريا.",
     pdfLink: "/files/sequences.pdf"
   },
-  {
-    id: "complex-numbers", 
-    title: "الأعداد المركبة",
-    videoUrl: "https://www.youtube.com/embed/Z_u5WJmO5p4", // فيديو الأعداد المركبة (غير الرابط لاحقاً)
-    description: "شرح الأعداد المركبة من الصفر.",
-    pdfLink: "/files/complex.pdf"
-  }
+ {
+  id: "complex-numbers",
+  title: "الأعداد المركبة",
+videoUrl: "https://www.youtube.com/embed/QlUOSPjeGw8?rel=0", 
+  description: "شرح مفصل تحويلات النفطية الأستاذ نور الدين.",
+  pdfLink: "/files/complex.pdf"
+}
 ];
