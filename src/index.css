@@ -75,8 +75,8 @@
 .light [style*="rgba(255,255,255,0.04)"],
 .light [style*="rgba(255,255,255,0.05)"],
 .light [style*="rgba(255,255,255,0.06)"] {
-  background: rgba(255,255,255,0.3) !important;
-  border-color: rgba(255,255,255,0.65) !important;
+  background: rgba(18, 9, 43, 0.3) !important;
+  border-color: rgba(137, 129, 129, 0.235) !important;
 }
  
 /* ── Inputs in light mode ── */
