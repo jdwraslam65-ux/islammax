@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { FunctionSquare, Sigma, Binary, Dice5, ArrowRight } from 'lucide-react';
-
+import { FunctionSquare, Sigma, Binary, Dice5, ArrowRight, BookOpenCheck } from 'lucide-react';
+ 
 const units = [
   {
     id: 'functions',
@@ -12,7 +12,8 @@ const units = [
     description: 'دراسة شاملة للدوال العددية، النهايات، والاشتقاق.',
     icon: FunctionSquare,
     color: 'text-blue-400',
-    gradient: 'from-blue-500/20 to-blue-600/5'
+    gradient: 'from-blue-500/20 to-blue-600/5',
+    finalReviewUrl: '/dashboard'
   },
   {
     id: 'sequences',
@@ -20,7 +21,8 @@ const units = [
     description: 'المتتاليات الحسابية والهندسية وتقارب المتتاليات.',
     icon: Sigma,
     color: 'text-purple-400',
-    gradient: 'from-purple-500/20 to-purple-600/5'
+    gradient: 'from-purple-500/20 to-purple-600/5',
+    finalReviewUrl: '/dashboard'
   },
   {
     id: 'complex',
@@ -28,7 +30,8 @@ const units = [
     description: 'العمليات الجبرية، الشكل المثلثي والأسّي، والتحويلات النقطية.',
     icon: Binary,
     color: 'text-pink-400',
-    gradient: 'from-pink-500/20 to-pink-600/5'
+    gradient: 'from-pink-500/20 to-pink-600/5',
+    finalReviewUrl: '/dashboard'
   },
   {
     id: 'probabilities',
@@ -36,10 +39,11 @@ const units = [
     description: 'التحليل التوفيقي، الاحتمالات الشرطية، والمتغيرات العشوائية.',
     icon: Dice5,
     color: 'text-green-400',
-    gradient: 'from-green-500/20 to-green-600/5'
+    gradient: 'from-green-500/20 to-green-600/5',
+    finalReviewUrl: '/dashboard'
   }
 ];
-
+ 
 const HomePage = () => {
   return (
     <div className="flex flex-col gap-16 pb-20">
@@ -81,7 +85,7 @@ const HomePage = () => {
           </motion.div>
         </div>
       </section>
-
+ 
       {/* Units Grid */}
       <section className="container mx-auto px-4">
         <div className="text-center mb-12">
@@ -100,8 +104,18 @@ const HomePage = () => {
             >
               <Card className={`h-full border-white/10 bg-gradient-to-br ${unit.gradient} backdrop-blur-xl hover:scale-105 hover:shadow-2xl hover:shadow-${unit.color.split('-')[1]}-500/20 transition-all duration-300 group`}>
                 <CardHeader>
-                  <div className={`w-12 h-12 rounded-lg bg-white/10 flex items-center justify-center mb-4 ${unit.color} group-hover:scale-110 transition-transform`}>
-                    <unit.icon className="w-6 h-6" />
+                  <div className="flex items-start justify-between mb-4">
+                    <div className={`w-12 h-12 rounded-lg bg-white/10 flex items-center justify-center ${unit.color} group-hover:scale-110 transition-transform`}>
+                      <unit.icon className="w-6 h-6" />
+                    </div>
+                    <Link
+                      to={unit.finalReviewUrl}
+                      title="مراجعة نهائية"
+                      className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-yellow-400/10 border border-yellow-400/30 text-yellow-300 hover:bg-yellow-400/20 hover:scale-105 transition-all text-xs font-semibold"
+                    >
+                      <BookOpenCheck className="w-3.5 h-3.5" />
+                      مراجعة نهائية
+                    </Link>
                   </div>
                   <CardTitle className="text-xl mb-2">{unit.title}</CardTitle>
                   <CardDescription className="text-gray-300 leading-relaxed">
@@ -124,5 +138,5 @@ const HomePage = () => {
     </div>
   );
 };
-
+ 
 export default HomePage;
