@@ -8,108 +8,271 @@
     --foreground: 210 40% 98%;
     --card: 222 47% 11%;
     --card-foreground: 210 40% 98%;
+    --popover: 222 47% 11%;
+    --popover-foreground: 210 40% 98%;
     --primary: 217 91% 60%;
     --primary-foreground: 222 47.4% 11.2%;
     --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 224.3 76.3% 48%;
     --radius: 0.5rem;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+  }
+ 
+  .dark {
+    --background: 222 47% 11%;
+    --foreground: 210 40% 98%;
+    --card: 222 47% 11%;
+    --card-foreground: 210 40% 98%;
     --popover: 222 47% 11%;
     --popover-foreground: 210 40% 98%;
+    --primary: 217 91% 60%;
+    --primary-foreground: 222 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 224.3 76.3% 48%;
   }
 }
  
 @layer base {
-  * { @apply border-border; }
+  * {
+    @apply border-border;
+  }
   body {
     @apply bg-background text-foreground;
-    background: transparent;
+    /* Mesh Gradient Background */
+    background-color: #0f172a;
+    background-image: 
+      radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), 
+      radial-gradient(at 50% 0%, hsla(225,39%,30%,1) 0, transparent 50%), 
+      radial-gradient(at 100% 0%, hsla(339,49%,30%,1) 0, transparent 50%);
+    background-attachment: fixed;
+  }
+  
+  /* ══ LIGHT MODE — وضع فاتح كامل ══ */
+  :root:not(.dark) body {
+    background-color: #fef9f0;
+    background-image:
+      radial-gradient(at 0%   0%,   hsla(38, 100%, 88%, 1) 0, transparent 55%),
+      radial-gradient(at 50%  0%,   hsla(45, 100%, 92%, 1) 0, transparent 55%),
+      radial-gradient(at 100% 0%,   hsla(30, 100%, 85%, 1) 0, transparent 55%),
+      radial-gradient(at 50%  100%, hsla(50, 90%,  90%, 1) 0, transparent 55%);
+    color: #1a1a2e;
+  }
+ 
+  /* نصوص في الوضع الفاتح */
+  :root:not(.dark) .text-white        { color: #1a1a2e !important; }
+  :root:not(.dark) .text-white\/90    { color: #2d2d44 !important; }
+  :root:not(.dark) .text-white\/85    { color: #2d2d44 !important; }
+  :root:not(.dark) .text-white\/80    { color: #3d3d55 !important; }
+  :root:not(.dark) .text-white\/72    { color: #4a4a66 !important; }
+  :root:not(.dark) .text-white\/70    { color: #4a4a66 !important; }
+  :root:not(.dark) .text-white\/60    { color: #5a5a77 !important; }
+  :root:not(.dark) .text-white\/55    { color: #5a5a77 !important; }
+  :root:not(.dark) .text-white\/50    { color: #6a6a88 !important; }
+  :root:not(.dark) .text-white\/45    { color: #6a6a88 !important; }
+  :root:not(.dark) .text-white\/40    { color: #7a7a99 !important; }
+  :root:not(.dark) .text-white\/38    { color: #8888aa !important; }
+  :root:not(.dark) .text-white\/35    { color: #8888aa !important; }
+  :root:not(.dark) .text-white\/25    { color: #9999bb !important; }
+  :root:not(.dark) .text-white\/20    { color: #aaaacc !important; }
+ 
+  /* البطاقات والعناصر الزجاجية */
+  :root:not(.dark) [style*="rgba(255,255,255,0.07)"],
+  :root:not(.dark) [style*="rgba(255,255,255,0.06)"],
+  :root:not(.dark) [style*="rgba(255,255,255,0.04)"],
+  :root:not(.dark) [style*="rgba(255,255,255,0.05)"] {
+    background: rgba(255, 255, 255, 0.55) !important;
+    border-color: rgba(255, 255, 255, 0.8) !important;
+  }
+ 
+  /* الخلفية الثابتة للصفحات */
+  :root:not(.dark) .fixed.-z-10 > div:first-child {
+    background: linear-gradient(135deg, #fef3c7, #fde8c0, #fef9f0) !important;
+  }
+ 
+  /* inputs في الوضع الفاتح */
+  :root:not(.dark) input[type="number"] {
+    background: rgba(0,0,0,0.06) !important;
+    color: #1a1a2e !important;
+    border-color: rgba(0,0,0,0.1) !important;
+  }
+  :root:not(.dark) input::placeholder { color: rgba(0,0,0,0.25) !important; }
+ 
+  /* الـ header pill في الوضع الفاتح */
+  :root:not(.dark) header [style*="rgba(255,255,255,0.06)"] {
+    background: rgba(255, 255, 255, 0.45) !important;
+    border-color: rgba(255, 255, 255, 0.9) !important;
+    box-shadow: 0 1px 0 rgba(255,255,255,0.9) inset, 0 8px 32px rgba(180,120,0,0.12), 0 1px 2px rgba(0,0,0,0.06) !important;
   }
 }
  
-/* ══════════════════════════════════════════
-   DARK MODE  (default)
-══════════════════════════════════════════ */
-.dark {
-  --glass-bg:     rgba(255,255,255,0.07);
-  --glass-border: rgba(255,255,255,0.16);
-  --glass-shine:  rgba(255,255,255,0.28);
-  --text-primary: rgba(255,255,255,0.93);
-  --text-secondary: rgba(255,255,255,0.5);
-  --text-muted:   rgba(255,255,255,0.3);
-  --card-hover:   rgba(255,255,255,0.11);
-  --input-bg:     rgba(0,0,0,0.28);
-}
- 
-/* ══════════════════════════════════════════
-   LIGHT MODE  — وضع نهاري كامل
-══════════════════════════════════════════ */
-.light {
-  --glass-bg:     rgba(255,255,255,0.38);
-  --glass-border: rgba(255,255,255,0.75);
-  --glass-shine:  rgba(255,255,255,0.95);
-  --text-primary: rgba(18,12,4,0.92);
-  --text-secondary: rgba(18,12,4,0.55);
-  --text-muted:   rgba(18,12,4,0.35);
-  --card-hover:   rgba(255,255,255,0.55);
-  --input-bg:     rgba(255,255,255,0.5);
-}
- 
-/* ── Apply CSS vars to tailwind text classes ── */
-.light .text-white,
-.light [class*="text-white"]  { color: var(--text-primary) !important; }
- 
-/* ── Glass cards adapt ── */
-.light [style*="rgba(255,255,255,0.07)"] {
-  background: var(--glass-bg) !important;
-  border-color: var(--glass-border) !important;
-}
-.light [style*="rgba(255,255,255,0.04)"],
-.light [style*="rgba(255,255,255,0.05)"],
-.light [style*="rgba(255,255,255,0.06)"] {
-  background: rgba(18, 9, 43, 0.3) !important;
-  border-color: rgba(137, 129, 129, 0.235) !important;
-}
- 
-/* ── Inputs in light mode ── */
-.light input[type="number"],
-.light input[type="text"],
-.light input[type="email"],
-.light input[type="password"] {
-  background: rgba(255,255,255,0.55) !important;
-  color: rgba(18,12,4,0.9) !important;
-  border-color: rgba(0,0,0,0.12) !important;
-}
-.light input::placeholder { color: rgba(18,12,4,0.3) !important; }
- 
-/* ── Scrollbar ── */
-::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 99px; }
-.light ::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.12); }
- 
-/* ── Countdown legacy ── */
-#cd-fab {
-  position: fixed; bottom: 25px; left: 25px;
-  width: 55px; height: 55px;
-  background: rgba(255,255,255,0.12);
-  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255,255,255,0.25); border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 24px; cursor: pointer; z-index: 9999;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.4);
-  transition: transform 0.3s;
-}
-#cd-fab:hover { transform: scale(1.1) rotate(8deg); }
- 
 /* Glassmorphism Utilities */
-.glass       { @apply bg-white/10 backdrop-blur-lg border border-white/20 shadow-xl; }
-.glass-card  { @apply bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl; }
+.glass {
+  @apply bg-white/10 backdrop-blur-lg border border-white/20 shadow-xl;
+}
+ 
+.glass-card {
+  @apply bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl;
+}/* تنسيق العداد الزجاجي */
+/* الأيقونة العائمة */
+#countdown-icon {
+    position: fixed;
+    bottom: 25px;
+    left: 25px; /* غيرتها لليسار لكي لا تغطي أزرار أخرى */
+    width: 55px;
+    height: 55px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 25px;
+    cursor: pointer;
+    z-index: 999;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    transition: 0.3s;
+}
+ 
+#countdown-icon:hover { transform: scale(1.1) rotate(10deg); }
+ 
+/* الحاوية المنبثقة الخلفية */
+#countdown-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
+    z-index: 1000;
+}
+ 
+#countdown-overlay.active { display: block; }
+ 
+.overlay-content {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 450px;
+}
+ 
+/* زر الإغلاق */
+.close-btn {
+    position: absolute;
+    top: -45px; right: 0;
+    background: none; border: none;
+    color: white; font-size: 35px; cursor: pointer;
+}
+ 
+/* تنسيق الصندوق الزجاجي (نفس الذي أعجبك) */
+.countdown-container {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 24px;
+    padding: 2rem;
+    text-align: center;
+    color: white;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+}
+ 
+.countdown-grid { display: flex; justify-content: center; gap: 10px; }
+.time-box { background: rgba(255, 255, 255, 0.1); padding: 10px; border-radius: 12px; min-width: 65px; }
+.time-box span { font-size: 1.8rem; font-weight: bold; display: block; }
+.time-box p { font-size: 0.7rem; margin: 0; opacity: 0.8; }
+/* --- تنسيقات الموقع الزجاجية --- */
+:root {
+  --glass-bg: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --blur: blur(15px);
+}
+ 
+/* الخلفية المنقطة للقسم */
+.glass-section {
+    background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+    padding: 40px 10px;
+    border-radius: 30px;
+    margin: 20px auto;
+    max-width: 1000px;
+}
+ 
+/* البطاقات الزجاجية للشعب */
+.glass-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+ 
+.glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: var(--blur);
+    -webkit-backdrop-filter: var(--blur);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 25px;
+    text-align: center;
+    color: white;
+    transition: 0.3s;
+    cursor: pointer;
+}
+ 
+.glass-card:hover { transform: translateY(-5px); background: rgba(255, 255, 255, 0.15); }
+ 
+/* الأيقونة العائمة للعداد */
+#countdown-icon {
+    position: fixed; bottom: 25px; left: 25px;
+    width: 60px; height: 60px;
+    background: var(--glass-bg); backdrop-filter: var(--blur);
+    border: 1px solid var(--glass-border); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 25px; cursor: pointer; z-index: 999;
+}
+ 
+/* النافذة المنبثقة (المودال) */
+.hidden-overlay {
+    display: none; position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(5px);
+    z-index: 1000;
+}
+ 
+.overlay-content {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%); width: 90%; max-width: 450px;
+}
+ 
+/* خانات إدخال النقاط */
+.subject-row {
+    display: flex; justify-content: space-between; margin-bottom: 10px;
+    background: rgba(255,255,255,0.05); padding: 8px; border-radius: 10px;
+}
+ 
+.score-input {
+    width: 60px; background: rgba(255,255,255,0.1); border: 1px solid var(--glass-border);
+    border-radius: 5px; color: white; text-align: center;
+}
+ 
+.calc-btn {
+    background: #3498db; color: white; border: none; padding: 10px;
+    width: 100%; border-radius: 10px; cursor: pointer; font-weight: bold;
+}
