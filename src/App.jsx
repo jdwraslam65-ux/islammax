@@ -14,7 +14,8 @@ import { Toaster } from '@/components/ui/toaster';
 import SequencesPage from '@/pages/SequencesPage';
 import CalculatorPage from '@/pages/CalculatorPage';
 // 1. أضفنا استيراد صفحة الفيديو هنا (تأكد من إنشاء الملف في مجلد pages)
-import LessonPage from '@/pages/LessonPage'; 
+import LessonPage from '@/pages/LessonPage';
+import { Analytics } from '@vercel/analytics/react'; 
 
 /* ─── Video Background + Theme Wrapper ─── */
 function AppShell({ children }) {
@@ -96,6 +97,7 @@ function App() {
             </main>
             <Footer />
             <Toaster />
+            <Analytics />
           </AppShell>
         </Router>
       </AuthProvider>
