@@ -2,14 +2,15 @@ import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { FunctionSquare, Sigma, Binary, Dice5, ArrowRight, BookOpenCheck, Sparkles, ChevronDown } from 'lucide-react';
- 
+
+// تم تحديث الـ id ليتوافق مع نظام الدروس الجديد
 const units = [
   { id: 'functions', title: 'الدوال', description: 'دراسة شاملة للدوال العددية، النهايات، والاشتقاق.', icon: FunctionSquare, orb: ['#3b82f6', '#818cf8'], finalReviewUrl: '/dashboard' },
   { id: 'sequences', title: 'المتتاليات', description: 'المتتاليات الحسابية والهندسية وتقارب المتتاليات.', icon: Sigma, orb: ['#a855f7', '#ec4899'], finalReviewUrl: '/dashboard' },
-  { id: 'complex', title: 'الأعداد المركبة', description: 'العمليات الجبرية، الشكل المثلثي والأسّي، والتحويلات.', icon: Binary, orb: ['#f43f5e', '#fb923c'], finalReviewUrl: '/dashboard' },
+  { id: 'complex-numbers', title: 'الأعداد المركبة', description: 'العمليات الجبرية، الشكل المثلثي والأسّي، والتحويلات.', icon: Binary, orb: ['#f43f5e', '#fb923c'], finalReviewUrl: '/dashboard' },
   { id: 'probabilities', title: 'الاحتمالات', description: 'التحليل التوفيقي، الاحتمالات الشرطية، والمتغيرات العشوائية.', icon: Dice5, orb: ['#10b981', '#06b6d4'], finalReviewUrl: '/dashboard' },
 ];
- 
+
 function GlassCard({ unit, index }) {
   const cardRef = useRef(null);
   const mouseX = useMotionValue(0);
@@ -18,7 +19,7 @@ function GlassCard({ unit, index }) {
   const rotateY = useSpring(useTransform(mouseX, [-150, 150], [-8, 8]), { stiffness: 300, damping: 30 });
   const glowX = useTransform(mouseX, [-150, 150], [0, 100]);
   const glowY = useTransform(mouseY, [-150, 150], [0, 100]);
- 
+
   const handleMouseMove = (e) => {
     const rect = cardRef.current.getBoundingClientRect();
     mouseX.set(e.clientX - rect.left - rect.width / 2);
@@ -26,7 +27,7 @@ function GlassCard({ unit, index }) {
   };
   const handleMouseLeave = () => { mouseX.set(0); mouseY.set(0); };
   const Icon = unit.icon;
- 
+
   return (
     <motion.div
       ref={cardRef}
@@ -56,7 +57,9 @@ function GlassCard({ unit, index }) {
           </div>
           <h3 className="text-xl font-bold text-white mb-2 tracking-tight">{unit.title}</h3>
           <p className="text-sm leading-relaxed flex-1" style={{ color: 'rgba(255,255,255,0.5)' }}>{unit.description}</p>
-          <Link to="/dashboard" className="mt-6 block">
+          
+          {/* تم تعديل الرابط هنا ليوجه لصفحة الدرس بناءً على id الوحدة */}
+          <Link to={`/unit/${unit.id}`} className="mt-6 block">
             <div className="flex items-center justify-between px-4 py-3 rounded-2xl text-sm font-medium transition-all duration-300 group-hover:bg-white/10" style={{ border: '1px solid rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.6)' }}>
               <span>تصفح الدروس</span>
               <ArrowRight className="w-4 h-4 rotate-180" />
@@ -67,7 +70,7 @@ function GlassCard({ unit, index }) {
     </motion.div>
   );
 }
- 
+
 function BackgroundOrbs() {
   return (
     <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
@@ -79,7 +82,7 @@ function BackgroundOrbs() {
     </div>
   );
 }
- 
+
 function GlassButton({ children, to, primary }) {
   return (
     <Link to={to}>
@@ -89,36 +92,36 @@ function GlassButton({ children, to, primary }) {
     </Link>
   );
 }
- 
+
 const HomePage = () => {
   return (
     <div className="relative min-h-screen" dir="rtl">
       <BackgroundOrbs />
       <div className="relative z-10 flex flex-col gap-24 pb-32">
- 
+
         {/* Hero */}
         <section className="min-h-screen flex flex-col items-center justify-center text-center px-4 pt-20 relative">
           <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="mb-8 inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium" style={{ background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.18)', backdropFilter: 'blur(20px)', color: 'rgba(255,255,255,0.75)' }}>
             <Sparkles className="w-4 h-4 text-yellow-300" />
             منصة البكالوريا الجزائرية #1
           </motion.div>
- 
+
           <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 0.1, ease: [0.23, 1, 0.32, 1] }} className="text-6xl md:text-8xl font-black text-white mb-6 leading-none tracking-tight" style={{ fontFamily: "system-ui, -apple-system, BlinkMacSystemFont, sans-serif", textShadow: '0 0 80px rgba(99,102,241,0.4)' }}>
             إسلام
             <span className="block" style={{ background: 'linear-gradient(135deg, #818cf8 0%, #c084fc 40%, #38bdf8 80%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', filter: 'drop-shadow(0 0 30px rgba(129,140,248,0.5))' }}>
               ماكس
             </span>
           </motion.h1>
- 
+
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.25 }} className="text-xl md:text-2xl max-w-2xl mx-auto mb-12 leading-relaxed" style={{ color: 'rgba(255,255,255,0.5)' }}>
             رفيقك الأمثل للتحضير لشهادة البكالوريا في مادة الرياضيات. دروس تفاعلية، تمارين محلولة، وملخصات شاملة.
           </motion.p>
- 
+
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.4 }} className="flex flex-col sm:flex-row gap-4 justify-center">
             <GlassButton to="/signup" primary>ابدأ الدراسة مجاناً</GlassButton>
             <GlassButton to="/login">تسجيل الدخول</GlassButton>
           </motion.div>
- 
+
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.2 }} className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2" style={{ color: 'rgba(255,255,255,0.3)' }}>
             <span className="text-xs tracking-widest uppercase">اكتشف</span>
             <motion.div animate={{ y: [0, 6, 0] }} transition={{ duration: 1.5, repeat: Infinity }}>
@@ -126,7 +129,7 @@ const HomePage = () => {
             </motion.div>
           </motion.div>
         </section>
- 
+
         {/* Units */}
         <section className="container mx-auto px-4 max-w-6xl">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} viewport={{ once: true }} className="text-center mb-14">
@@ -136,12 +139,12 @@ const HomePage = () => {
             <h2 className="text-4xl md:text-5xl font-black text-white mb-3 tracking-tight" style={{ fontFamily: "system-ui, -apple-system, BlinkMacSystemFont, sans-serif" }}>تغطية شاملة</h2>
             <p style={{ color: 'rgba(255,255,255,0.4)' }}>لجميع وحدات البرنامج الدراسي للبكالوريا</p>
           </motion.div>
- 
+
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {units.map((unit, i) => <GlassCard key={unit.id} unit={unit} index={i} />)}
           </div>
         </section>
- 
+
         {/* CTA Banner */}
         <section className="container mx-auto px-4 max-w-4xl">
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} viewport={{ once: true }} className="relative rounded-3xl overflow-hidden p-12 text-center" style={{ background: 'rgba(255,255,255,0.06)', backdropFilter: 'blur(40px)', border: '1px solid rgba(255,255,255,0.15)', boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.2)' }}>
@@ -154,11 +157,10 @@ const HomePage = () => {
             </div>
           </motion.div>
         </section>
- 
+
       </div>
     </div>
   );
 };
- 
+
 export default HomePage;
- 
